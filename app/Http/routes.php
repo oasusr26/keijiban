@@ -24,3 +24,8 @@ Route::get('login', 'Auth\AuthController@getLogin')->name('login.get');
 Route::post('login', 'Auth\AuthController@postLogin')->name('login.post');
 Route::get('logout', 'Auth\AuthController@getLogout')->name('logout.get');
 
+// ログイン認証付きのルーティング
+Route::group(['middleware' => 'auth'], function() {
+    Route::resource('users', 'UsersController', ['only' => ['index', 'show']]);
+});
+
